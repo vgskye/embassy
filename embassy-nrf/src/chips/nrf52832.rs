@@ -150,6 +150,10 @@ embassy_hal_internal::peripherals! {
 
     // PDM
     PDM,
+
+    // NFCT
+    #[cfg(not(feature = "nfc-pins-as-gpio"))]
+    NFCT,
 }
 
 impl_uarte!(UARTE0, UARTE0, UARTE0_UART0);
@@ -263,6 +267,9 @@ impl_saadc_input!(P0_30, ANALOG_INPUT6);
 impl_saadc_input!(P0_31, ANALOG_INPUT7);
 
 impl_i2s!(I2S, I2S, I2S);
+
+#[cfg(not(feature = "nfc-pins-as-gpio"))]
+impl_nfct!(NFCT, NFCT, NFCT);
 
 embassy_hal_internal::interrupt_mod!(
     POWER_CLOCK,
